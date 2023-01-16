@@ -1,12 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from '../../../assets/logo.svg'
+import logo from "../../../assets/logo.svg";
+import {
+  ShoppingBagIcon,
+  MagnifyingGlassIcon,
+} from "@heroicons/react/24/solid";
 const Header = () => {
-    const menuItems = <>
-        <li><Link to='/'>Home</Link></li>
+  const menuItems = (
+    <>
+      <li className="font-semibold">
+        <Link to="/">Home</Link>
+      </li>
+      <li className="font-semibold">
+        <Link to="/">About</Link>
+      </li>
+      <li className="font-semibold">
+        <Link to="/">Services</Link>
+      </li>
+      <li className="font-semibold">
+        <Link to="/">Blog</Link>
+      </li>
+      <li className="font-semibold">
+        <Link to="/">Contact</Link>
+      </li>
     </>
+  );
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar h-20 mb-12 pt-12 bg-base-100">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -32,18 +52,19 @@ const Header = () => {
             {menuItems}
           </ul>
         </div>
-        <Link to='/' className="btn btn-ghost normal-case text-xl">
-            <img src={logo} alt="" />
+        <Link to="/" className="btn btn-ghost normal-case text-xl">
+          <img src={logo} alt="" />
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          {menuItems}
-           
-        </ul>
+        <ul className="menu menu-horizontal px-1">{menuItems}</ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Get started</a>
+        <ShoppingBagIcon className="h-6 w-6 " />
+        <MagnifyingGlassIcon className="h-5 w-5 ml-5 mr-7" />
+        <a href="/" className="btn btn-outline btn-error font-semibold">
+          Appointment
+        </a>
       </div>
     </div>
   );
