@@ -23,6 +23,9 @@ const Header = () => {
       <li className="font-semibold">
         <Link to="/">Contact</Link>
       </li>
+      <li className="font-semibold">
+        <Link to="/login">Login</Link>
+      </li>
     </>
   );
   return (

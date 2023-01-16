@@ -12,10 +12,10 @@ const Services = () => {
     <div className="my-32">
       <div>
         <p className="text-2xl font-bold text-orange-600 text-center">
-          Popular Products
+        Service
         </p>
         <h1 className="text-[#151515] font-bold text-5xl text-center my-5">
-          Browse Our Products
+        Our Service Area
         </h1>
         <p className="text-[#737373] capitalize text-center">
           the majority have suffered alteration in some form, by injected
@@ -23,7 +23,7 @@ const Services = () => {
           believable.{" "}
         </p>
       </div>
-      <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-12">
         {
             services.map(service=><ServiceCard key={service._id}  service={service}/>)
         }
