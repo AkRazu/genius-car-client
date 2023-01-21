@@ -34,7 +34,7 @@ const Question = () => {
             </div>
             <div>
               <p className="font-[500]">Need a repair? our address</p>
-              <h2 className="font-bold text-2xl">+Liza Street, New York</h2>
+              <h2 className="font-bold text-2xl">Liza Street, New York</h2>
             </div>
           </div>
         </div>
