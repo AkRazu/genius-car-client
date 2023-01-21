@@ -1,7 +1,8 @@
 import React from 'react';
 import img from '../../assets/images/login/login.svg'
 import { Link } from "react-router-dom";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faG } from '@fortawesome/free-solid-svg-icons'
 const Login = () => {
     const handelLogin = event =>{
         event.preventDefault();
@@ -37,7 +38,20 @@ const Login = () => {
 
       <p className='text-center text-[#737373]'>New to Genius Car? <Link to='/signup' className='text-orange-600 font-semibold
       '>Sign Up</Link> </p>
+      <div className='flex justify-center mt-6 px-8'>
+        
+        <button className="btn btn-circle mr-4">
+        <i class="text-xl fa-brands fa-facebook-f"></i>
+        </button>
+        <button className="btn btn-circle mr-4">
+        <i class="text-xl fa-brands fa-linkedin-in"></i>
+        </button>
+        <button className="btn btn-circle">
+        <i class="text-xl fa-brands fa-google"></i>
+        </button>
     </div>
+    </div>
+    
   </div>
 </div>
     );
