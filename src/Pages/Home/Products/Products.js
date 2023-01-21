@@ -22,6 +22,9 @@ const Products = () => {
                     products.map(product=><Product key={product._id} product={product} />)
                 }
             </div>
+            <div className='mb-32'>
+            <button className="btn block mx-auto btn-outline btn-error">More Products</button>
+            </div>
         </div>
     );
 };
