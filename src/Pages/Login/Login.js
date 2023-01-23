@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import img from '../../assets/images/login/login.svg'
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faG } from '@fortawesome/free-solid-svg-icons'
+import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
 const Login = () => {
+  const {login} = useContext(AuthContext);
     const handelLogin = event =>{
         event.preventDefault();
+        const from = event.target;
+        const email = from.email.value;
+        const password = from.password.value;
+        login(email,password)
+        .then(result =>{
+          const user = result.user;
+          console.log(user);
+        })
+        .then(err=>console.log(err))
     }
     return (
         <div className="hero max-w-7xl mx-auto my-20">
@@ -20,13 +31,13 @@ const Login = () => {
           <label className="label">
             <span className="label-text">Email</span>
           </label>
-          <input type="text" placeholder="Your email" className="input input-bordered" />
+          <input name='email' type="text" placeholder="Your email" className="input input-bordered" />
         </div>
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Confirm Password</span>
+            <span className="label-text">Password</span>
           </label>
-          <input type="text" placeholder="Your password" className="input input-bordered" />
+          <input name='password' type="text" placeholder="Your password" className="input input-bordered" />
           <label className="label">
             <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
           </label>
