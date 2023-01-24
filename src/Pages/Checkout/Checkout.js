@@ -3,25 +3,46 @@ import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 import "./Checkout.css";
 const Checkout = () => {
-  const { _id,title, price } = useLoaderData();
+  const { _id, title, price } = useLoaderData();
   const { user } = useContext(AuthContext);
-  const handelPlaceOrder =event=>{
+  const handelPlaceOrder = (event) => {
     event.preventDefault();
-    const form =event.target;
-    const name = `${form.firstName.value} ${form.lastName.value}`
-    const email = user?.email || 'unregistered'
+    const form = event.target;
+    const name = `${form.firstName.value} ${form.lastName.value}`;
+    const email = user?.email || "unregistered";
     const phone = form.phone.value;
     const message = form.message.value;
     const order = {
       service: _id,
-      serviceName : title,
+      serviceName: title,
       price,
-      customer:name,
+      customer: name,
       email,
       phone,
-      message
+      message,
+    };
+    if(phone.length > 10){
+      alert('Phone number should be 10 characters or longer');
+    }else{
+      fetch("http://localhost:5000/orders", {
+        method: "POST",
+        body: JSON.stringify({
+          order
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {console.log(json)
+          if(json.acknowledged){
+            alert('Order Placed successfully !!')
+            form.reset();
+          }}
+        );
     }
-  }
+    
+  };
   return (
     <div className="max-w-7xl mx-auto">
       <div className="mt-6 checkout-img relative w-fit rounded-lg">
@@ -53,6 +74,7 @@ const Checkout = () => {
               type="text"
               placeholder="Your Phone"
               className="input input-bordered w-full "
+              required
             />
             <input
               name="email"
@@ -68,9 +90,14 @@ const Checkout = () => {
               name="message"
               className="textarea w-full h-24 mt-4 textarea-bordered"
               placeholder="Your Message"
+              required
             ></textarea>
-            
-            <input className="btn border-0 my-6 w-full bg-[#FF3811]" type="submit" value="Order Confirm" />
+
+            <input
+              className="btn border-0 my-6 w-full bg-[#FF3811]"
+              type="submit"
+              value="Order Confirm"
+            />
           </div>
         </form>
       </div>
