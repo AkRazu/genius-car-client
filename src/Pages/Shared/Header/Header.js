@@ -5,7 +5,10 @@ import {
   ShoppingBagIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/solid";
+import { useContext } from "react";
+import { AuthContext } from "../../../Contexts/AuthProvider/AuthProvider";
 const Header = () => {
+  const { user } = useContext(AuthContext);
   const menuItems = (
     <>
       <li className="font-semibold">
@@ -23,9 +26,17 @@ const Header = () => {
       <li className="font-semibold">
         <Link to="/">Contact</Link>
       </li>
-      <li className="font-semibold">
-        <Link to="/login">Login</Link>
-      </li>
+      {user?.email ? (
+        <>
+          <li className="font-semibold">
+            <Link to="/orders">Orders</Link>
+          </li>
+        </>
+      ) : (
+        <li className="font-semibold">
+          <Link to="/login">Login</Link>
+        </li>
+      )}
     </>
   );
   return (
@@ -63,7 +74,9 @@ const Header = () => {
         <ul className="menu menu-horizontal px-1">{menuItems}</ul>
       </div>
       <div className="navbar-end">
-        <Link to="/orders"><ShoppingBagIcon className="h-6 w-6 " /></Link>
+        <Link to="/orders">
+          <ShoppingBagIcon className="h-6 w-6 " />
+        </Link>
         <MagnifyingGlassIcon className="h-5 w-5 ml-5 mr-7" />
         <a href="/" className="btn btn-outline btn-error font-semibold">
           Appointment
