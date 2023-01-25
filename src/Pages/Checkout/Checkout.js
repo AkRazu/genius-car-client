@@ -5,13 +5,15 @@ import "./Checkout.css";
 const Checkout = () => {
   const { _id, title, price } = useLoaderData();
   const { user } = useContext(AuthContext);
-  const handelPlaceOrder = (event) => {
+
+  const handlePlaceOrder = (event) => {
     event.preventDefault();
     const form = event.target;
     const name = `${form.firstName.value} ${form.lastName.value}`;
     const email = user?.email || "unregistered";
     const phone = form.phone.value;
     const message = form.message.value;
+
     const order = {
       service: _id,
       serviceName: title,
@@ -21,27 +23,30 @@ const Checkout = () => {
       phone,
       message,
     };
-    if(phone.length > 10){
-      alert('Phone number should be 10 characters or longer');
-    }else{
-      fetch("http://localhost:5000/orders", {
-        method: "POST",
-        body: JSON.stringify({
-          order
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
+
+    // if(phone.length > 10){
+    //     alert('Phone number should be 10 characters or longer')
+    // }
+    // else{
+
+    // }
+
+    fetch("http://localhost:5000/orders", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(order),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.acknowledged) {
+          alert("Order placed successfully");
+          form.reset();
+        }
       })
-        .then((response) => response.json())
-        .then((json) => {console.log(json)
-          if(json.acknowledged){
-            alert('Order Placed successfully !!')
-            form.reset();
-          }}
-        );
-    }
-    
+      .catch((er) => console.error(er));
   };
   return (
     <div className="max-w-7xl mx-auto">
@@ -55,33 +60,33 @@ const Checkout = () => {
         <h4 className="text-4xl">Price : ${price}</h4>
       </div>
       <div className="bg-[#F3F3F3] rounded-lg my-32 py-24">
-        <form onSubmit={handelPlaceOrder} className="w-10/12 mx-auto">
+        <form onSubmit={handlePlaceOrder} className="w-10/12 mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <input
               name="firstName"
               type="text"
               placeholder="First Name"
-              className="input input-bordered w-full "
+              className="input input-ghost w-full  input-bordered"
             />
             <input
               name="lastName"
               type="text"
               placeholder="Last Name"
-              className="input input-bordered w-full "
+              className="input input-ghost w-full  input-bordered"
             />
             <input
               name="phone"
               type="text"
               placeholder="Your Phone"
-              className="input input-bordered w-full "
+              className="input input-ghost w-full  input-bordered"
               required
             />
             <input
               name="email"
               type="text"
-              placeholder="Your Email"
+              placeholder="Your email"
               defaultValue={user?.email}
-              className="input input-bordered w-full "
+              className="input input-ghost w-full  input-bordered"
               readOnly
             />
           </div>
