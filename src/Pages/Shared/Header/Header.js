@@ -63,7 +63,7 @@ const Header = () => {
         <ul className="menu menu-horizontal px-1">{menuItems}</ul>
       </div>
       <div className="navbar-end">
-        <ShoppingBagIcon className="h-6 w-6 " />
+        <Link to="/orders"><ShoppingBagIcon className="h-6 w-6 " /></Link>
         <MagnifyingGlassIcon className="h-5 w-5 ml-5 mr-7" />
         <a href="/" className="btn btn-outline btn-error font-semibold">
           Appointment
